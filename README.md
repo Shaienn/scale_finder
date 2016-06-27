@@ -25,5 +25,21 @@ To recognize a chord just send it to function "parse_chord".
     bass_key - letter of bass tone
     tones - chord_tones - array of tones in chord relative to root tone which is 0
     keys - chord_keys - array of letters for chord tones 
-    suffix - chord modifier 
+    suffix - chord modifier
+    
+# Find scale
+To find scale put array of chords to the "find_scale" function:
+
+    var chords = [ 'D', 'A', 'Bm', 'G' ];
+    var scale_object = find_scale(chords);
+    console.log(scale_object);
+    { 
+        root_key: 'D',
+        scale: 0,
+        semitones: [ 0, 2, 4, 5, 7, 9, 11 ],
+        keys: [ 'D', 'E', 'F#', 'G', 'A', 'B', 'C#' ],
+        extra_tones: [],
+        extra_keys: [],
+        extra_steps: [] 
+    }
 
