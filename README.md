@@ -36,7 +36,7 @@ To find scale put array of chords to the "find_scale" function:
     { 
         root_key: 'D',
         scale: 0,
-        semitones: [ 0, 2, 4, 5, 7, 9, 11 ],
+        tones: [ 0, 2, 4, 5, 7, 9, 11 ],
         keys: [ 'D', 'E', 'F#', 'G', 'A', 'B', 'C#' ],
         extra_tones: [],
         extra_keys: [],
