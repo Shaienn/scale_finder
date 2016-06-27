@@ -4,7 +4,7 @@ This is the module to recognize chords and scales and perform correct transpose 
 
 # Chord parsing
 To recognize a chord just send it to function "parse_chord".
-    
+Example 1:
     var chord = "Am/G"
     var chord_object = parse_chord(chord);
     console.log(chord_object):
@@ -29,7 +29,7 @@ To recognize a chord just send it to function "parse_chord".
     
 # Find scale
 To find scale put array of chords to the "find_scale" function:
-
+##Example 2 - Straight D major: 
     var chords = [ 'D', 'A', 'Bm', 'G' ];
     var scale_object = find_scale(chords);
     console.log(scale_object);
@@ -42,4 +42,17 @@ To find scale put array of chords to the "find_scale" function:
         extra_keys: [],
         extra_steps: [] 
     }
+##Example 3 - G major with out of scale Eb and F chords.
+    var chords = [ 'G', 'C', 'Em', 'D', 'C', 'G', 'Am', 'Hm', 'Eb', 'F' ];
+    var scale_object = find_scale(chords);
+    { 
+        root_key: 'G',
+        scale: 0,
+        tones: [ 0, 2, 4, 5, 7, 9, 11 ],
+        keys: [ 'G', 'A', 'B', 'C', 'D', 'E', 'F#' ],
+        extra_tones: [ 3, 8, 10 ],
+        extra_keys: [ 'Bb', 'Eb', 'F' ],
+        extra_steps: [ 2, 5, 6 ] 
+    }
+
 
