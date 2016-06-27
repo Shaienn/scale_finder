@@ -1,0 +1,69 @@
+{
+  "_args": [
+    [
+      "scale_finder",
+      "/home/shaienn/workspace/nodejs/keystone/chrip"
+    ]
+  ],
+  "_from": "scale_finder@latest",
+  "_id": "scale_finder@1.0.8",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/scale_finder",
+  "_nodeVersion": "4.4.4",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/scale_finder-1.0.8.tgz_1463351317913_0.012736895587295294"
+  },
+  "_npmUser": {
+    "email": "shaienn@mail.ru",
+    "name": "shaienn"
+  },
+  "_npmVersion": "3.5.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "scale_finder",
+    "raw": "scale_finder",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/scale_finder/-/scale_finder-1.0.8.tgz",
+  "_shasum": "c3dffeca08183e108ac0f5f237c359ebf8b87713",
+  "_shrinkwrap": null,
+  "_spec": "scale_finder",
+  "_where": "/home/shaienn/workspace/nodejs/keystone/chrip",
+  "author": {
+    "name": "Shaienn"
+  },
+  "dependencies": {
+    "mocha": "^2.5.3",
+    "should": "^9.0.2"
+  },
+  "description": "",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "c3dffeca08183e108ac0f5f237c359ebf8b87713",
+    "tarball": "https://registry.npmjs.org/scale_finder/-/scale_finder-1.0.8.tgz"
+  },
+  "license": "ISC",
+  "main": "scale_finder",
+  "maintainers": [
+    {
+      "name": "shaienn",
+      "email": "shaienn@mail.ru"
+    }
+  ],
+  "name": "scale_finder",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.3"
+}
