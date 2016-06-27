@@ -4,8 +4,8 @@ This is the module to recognize chords and scales and perform correct transpose 
 
 # Chord parsing
 To recognize a chord just send it to function "parse_chord".
-var chord = "Am"
-var chord_object = parse_chord(chord);
+    var chord = "Am"
+    var chord_object = parse_chord(chord);
 ## Chord object contains:
     root_tone - root tone value according to tones table.
     bass_tone - if bass tone exists contains bass tone according tones table or null if not exists
