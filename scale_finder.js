@@ -34,59 +34,58 @@ module.exports = {
     },
     alphabet: {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 1},
     scales: [
-	{name: 'Major', semitones: [0, 2, 4, 5, 7, 9, 11]},
-	{name: 'Natural minor', semitones: [0, 2, 3, 5, 7, 8, 10]},
-	{name: 'Harmonic minor', semitones: [0, 2, 3, 5, 7, 8, 11]},
-	{name: 'Melodic minor', semitones: [0, 2, 3, 5, 7, 9, 11]},
-	{name: 'Dorian', semitones: [0, 2, 3, 5, 7, 9, 10]},
-	{name: 'Phrygian', semitones: [0, 1, 3, 5, 7, 8, 10]},
-	{name: 'Lidian', semitones: [0, 2, 4, 6, 7, 9, 11]},
-	{name: 'Mixolidian', semitones: [0, 2, 4, 5, 7, 9, 10]},
-	{name: 'Locrian', semitones: [0, 1, 3, 5, 6, 8, 10]},
-	{name: 'Natural minor', semitones: [0, 2, 3, 5, 7, 8, 10]},
+	{name: 'Major', tones: [0, 2, 4, 5, 7, 9, 11]},
+	{name: 'Natural minor', tones: [0, 2, 3, 5, 7, 8, 10]},
+	{name: 'Harmonic minor', tones: [0, 2, 3, 5, 7, 8, 11]},
+	{name: 'Melodic minor', tones: [0, 2, 3, 5, 7, 9, 11]},
+	{name: 'Dorian', tones: [0, 2, 3, 5, 7, 9, 10]},
+	{name: 'Phrygian', tones: [0, 1, 3, 5, 7, 8, 10]},
+	{name: 'Lidian', tones: [0, 2, 4, 6, 7, 9, 11]},
+	{name: 'Mixolidian', tones: [0, 2, 4, 5, 7, 9, 10]},
+	{name: 'Locrian', tones: [0, 1, 3, 5, 6, 8, 10]},
     ],
     chords: [
-	{suffix: '', semitones: [0, 4, 7], steps: [1, 3, 5]}, /* C [C E G]*/
-	{suffix: 'maj', semitones: [0, 4, 7], steps: [1, 3, 5]}, /* Cmaj */
-	{suffix: 'm', semitones: [0, 3, 7], steps: [1, 3, 5]}, /* Cm */
-	{suffix: '7', semitones: [0, 4, 7, 10], steps: [1, 3, 5, 7]}, /* C7 */
-	{suffix: 'm7', semitones: [0, 3, 7, 10], steps: [1, 3, 5, 7]}, /* Cm7 */
-	{suffix: 'min7', semitones: [0, 3, 7, 10], steps: [1, 3, 5, 7]}, /* Cmin7 [C Eb G Bb] */
-	{suffix: 'maj7', semitones: [0, 4, 7, 11], steps: [1, 3, 5, 7]}, /* Cmaj7 [C E G B] */
-	{suffix: 'sus4', semitones: [0, 5, 7], steps: [1, 4, 5]}, /* Csus4 */
-	{suffix: '7sus4', semitones: [0, 5, 7, 10], steps: [1, 4, 5, 7]}, /* C7sus4 [C F G Bb]*/
-	{suffix: '6', semitones: [0, 4, 7, 9], steps: [1, 3, 5, 6]}, /* C6 [C E G A] */
-	{suffix: 'm6', semitones: [0, 3, 7, 9], steps: [1, 3, 5, 6]}, /* Cm6 [C Eb G A]*/
-	{suffix: 'min6', semitones: [0, 3, 7, 9], steps: [1, 3, 5, 6]}, /* Cmin6 :[C Eb G A]*/
-	{suffix: 'dim', semitones: [0, 3, 6], steps: [1, 3, 5]}, /* Cdim [C Eb Gb] */
-	{suffix: 'aug', semitones: [0, 4, 8], steps: [1, 3, 5]}, /* Caug [C E G#] */
-	{suffix: '7-5', semitones: [0, 4, 6, 10], steps: [1, 3, 5, 7]}, /* C7-5 [C E Gb Bb] */
-	{suffix: '7+5', semitones: [0, 4, 8, 10], steps: [1, 3, 5, 7]}, /* C7+5 [C E G# Bb]*/
-	{suffix: 'm7-5', semitones: [0, 3, 6, 10], steps: [1, 3, 5, 7]}, /* Cm7-5 [C Eb Gb Bb] */
-	{suffix: 'm/maj7', semitones: [0, 3, 7, 11], steps: [1, 3, 5, 7]}, /* Cm/maj7 [C Eb G B] */
-	{suffix: 'maj7+5', semitones: [0, 4, 8, 11], steps: [1, 3, 5, 7]}, /* Cmaj7+5 [C E G# B] */
-	{suffix: 'maj7-5', semitones: [0, 4, 6, 11], steps: [1, 3, 5, 7]}, /* Cmaj7-5 [C E Gb B] */
-	{suffix: '9', semitones: [0, 4, 7, 10, 14], steps: [1, 3, 5, 7, 2]}, /* C9 [C E G Bb D] */
-	{suffix: 'm9', semitones: [0, 3, 7, 10, 14], steps: [1, 3, 5, 7, 2]}, /* Cm9 [C Eb G Bb D] */
-	{suffix: 'maj9', semitones: [0, 4, 7, 11, 14], steps: [1, 3, 5, 7, 2]}, /* Cm9 [C E G B D] */
-	{suffix: '7+9', semitones: [0, 4, 7, 10, 15], steps: [1, 3, 5, 7, 2]}, /* C7+9 [C E G Bb D#] */
-	{suffix: '7-9', semitones: [0, 4, 7, 10, 13], steps: [1, 3, 5, 7, 2]}, /* C7-9 [C E G Bb Db] */
-	{suffix: '7+9-5', semitones: [0, 4, 6, 10, 15], steps: [1, 3, 5, 7, 2]}, /* C7+9-5 [C E Gb Bb D#] */
-	{suffix: '6/9', semitones: [0, 4, 7, 9, 14], steps: [1, 3, 5, 6, 2]}, /* C6/9 [C E G A D] */
-	{suffix: '9+5', semitones: [0, 4, 8, 10, 14], steps: [1, 3, 5, 7, 2]}, /* C9+5 [C E G# Bb D] */
-	{suffix: '9-5', semitones: [0, 4, 6, 10, 14], steps: [1, 3, 5, 7, 2]}, /* C9-5 [C E Gb Bb D] */
-	{suffix: 'm9-5', semitones: [0, 3, 6, 10, 14], steps: [1, 3, 5, 7, 2]}, /* Cm9-5 [C Eb G# Bb D] */
-	{suffix: '11', semitones: [0, 4, 7, 10, 14, 17], steps: [1, 3, 5, 7, 2, 4]}, /* C11 [C E G Bb D F] */
-	{suffix: 'm11', semitones: [0, 3, 7, 10, 14, 17], steps: [1, 3, 5, 7, 2, 4]}, /* Cm11 [C Eb G Bb D F] */
-	{suffix: '11-9', semitones: [0, 4, 7, 10, 13, 17], steps: [1, 3, 5, 7, 2, 4]}, /* C11-9 [C E G Bb Db F] */
-	{suffix: '13', semitones: [0, 4, 7, 10, 14, 17, 21], steps: [1, 3, 5, 7, 2, 4, 6]}, /* C13 [C E G Bb D F A] */
-	{suffix: 'm13', semitones: [0, 3, 7, 10, 14, 17, 21], steps: [1, 3, 5, 7, 2, 4, 6]}, /* Cm13 [C Eb G Bb D F A] */
-	{suffix: 'maj13', semitones: [0, 4, 7, 11, 14, 17, 21], steps: [1, 3, 5, 7, 2, 4, 6]}, /* Cmaj13 [C E G B D F A] */
-	{suffix: 'add9', semitones: [0, 4, 7, 14], steps: [1, 3, 5, 2]}, /* Cadd9 [C E G D] */
-	{suffix: 'madd9', semitones: [0, 3, 7, 14], steps: [1, 3, 5, 2]}, /* Cmadd9 [C Eb G D] */
-	{suffix: 'sus2', semitones: [0, 2, 7], steps: [1, 2, 5]}, /* Csus2 */
-	{suffix: 'sus', semitones: [0, 2, 7], steps: [1, 2, 5]}, /* Csus */
-	{suffix: '5', semitones: [0, 7], steps: [1, 5]}, /* C5 */
+	{suffix: '', tones: [0, 4, 7], steps: [1, 3, 5]}, /* C [C E G]*/
+	{suffix: 'maj', tones: [0, 4, 7], steps: [1, 3, 5]}, /* Cmaj */
+	{suffix: 'm', tones: [0, 3, 7], steps: [1, 3, 5]}, /* Cm */
+	{suffix: '7', tones: [0, 4, 7, 10], steps: [1, 3, 5, 7]}, /* C7 */
+	{suffix: 'm7', tones: [0, 3, 7, 10], steps: [1, 3, 5, 7]}, /* Cm7 */
+	{suffix: 'min7', tones: [0, 3, 7, 10], steps: [1, 3, 5, 7]}, /* Cmin7 [C Eb G Bb] */
+	{suffix: 'maj7', tones: [0, 4, 7, 11], steps: [1, 3, 5, 7]}, /* Cmaj7 [C E G B] */
+	{suffix: 'sus4', tones: [0, 5, 7], steps: [1, 4, 5]}, /* Csus4 */
+	{suffix: '7sus4', tones: [0, 5, 7, 10], steps: [1, 4, 5, 7]}, /* C7sus4 [C F G Bb]*/
+	{suffix: '6', tones: [0, 4, 7, 9], steps: [1, 3, 5, 6]}, /* C6 [C E G A] */
+	{suffix: 'm6', tones: [0, 3, 7, 9], steps: [1, 3, 5, 6]}, /* Cm6 [C Eb G A]*/
+	{suffix: 'min6', tones: [0, 3, 7, 9], steps: [1, 3, 5, 6]}, /* Cmin6 :[C Eb G A]*/
+	{suffix: 'dim', tones: [0, 3, 6], steps: [1, 3, 5]}, /* Cdim [C Eb Gb] */
+	{suffix: 'aug', tones: [0, 4, 8], steps: [1, 3, 5]}, /* Caug [C E G#] */
+	{suffix: '7-5', tones: [0, 4, 6, 10], steps: [1, 3, 5, 7]}, /* C7-5 [C E Gb Bb] */
+	{suffix: '7+5', tones: [0, 4, 8, 10], steps: [1, 3, 5, 7]}, /* C7+5 [C E G# Bb]*/
+	{suffix: 'm7-5', tones: [0, 3, 6, 10], steps: [1, 3, 5, 7]}, /* Cm7-5 [C Eb Gb Bb] */
+	{suffix: 'm/maj7', tones: [0, 3, 7, 11], steps: [1, 3, 5, 7]}, /* Cm/maj7 [C Eb G B] */
+	{suffix: 'maj7+5', tones: [0, 4, 8, 11], steps: [1, 3, 5, 7]}, /* Cmaj7+5 [C E G# B] */
+	{suffix: 'maj7-5', tones: [0, 4, 6, 11], steps: [1, 3, 5, 7]}, /* Cmaj7-5 [C E Gb B] */
+	{suffix: '9', tones: [0, 4, 7, 10, 14], steps: [1, 3, 5, 7, 2]}, /* C9 [C E G Bb D] */
+	{suffix: 'm9', tones: [0, 3, 7, 10, 14], steps: [1, 3, 5, 7, 2]}, /* Cm9 [C Eb G Bb D] */
+	{suffix: 'maj9', tones: [0, 4, 7, 11, 14], steps: [1, 3, 5, 7, 2]}, /* Cm9 [C E G B D] */
+	{suffix: '7+9', tones: [0, 4, 7, 10, 15], steps: [1, 3, 5, 7, 2]}, /* C7+9 [C E G Bb D#] */
+	{suffix: '7-9', tones: [0, 4, 7, 10, 13], steps: [1, 3, 5, 7, 2]}, /* C7-9 [C E G Bb Db] */
+	{suffix: '7+9-5', tones: [0, 4, 6, 10, 15], steps: [1, 3, 5, 7, 2]}, /* C7+9-5 [C E Gb Bb D#] */
+	{suffix: '6/9', tones: [0, 4, 7, 9, 14], steps: [1, 3, 5, 6, 2]}, /* C6/9 [C E G A D] */
+	{suffix: '9+5', tones: [0, 4, 8, 10, 14], steps: [1, 3, 5, 7, 2]}, /* C9+5 [C E G# Bb D] */
+	{suffix: '9-5', tones: [0, 4, 6, 10, 14], steps: [1, 3, 5, 7, 2]}, /* C9-5 [C E Gb Bb D] */
+	{suffix: 'm9-5', tones: [0, 3, 6, 10, 14], steps: [1, 3, 5, 7, 2]}, /* Cm9-5 [C Eb G# Bb D] */
+	{suffix: '11', tones: [0, 4, 7, 10, 14, 17], steps: [1, 3, 5, 7, 2, 4]}, /* C11 [C E G Bb D F] */
+	{suffix: 'm11', tones: [0, 3, 7, 10, 14, 17], steps: [1, 3, 5, 7, 2, 4]}, /* Cm11 [C Eb G Bb D F] */
+	{suffix: '11-9', tones: [0, 4, 7, 10, 13, 17], steps: [1, 3, 5, 7, 2, 4]}, /* C11-9 [C E G Bb Db F] */
+	{suffix: '13', tones: [0, 4, 7, 10, 14, 17, 21], steps: [1, 3, 5, 7, 2, 4, 6]}, /* C13 [C E G Bb D F A] */
+	{suffix: 'm13', tones: [0, 3, 7, 10, 14, 17, 21], steps: [1, 3, 5, 7, 2, 4, 6]}, /* Cm13 [C Eb G Bb D F A] */
+	{suffix: 'maj13', tones: [0, 4, 7, 11, 14, 17, 21], steps: [1, 3, 5, 7, 2, 4, 6]}, /* Cmaj13 [C E G B D F A] */
+	{suffix: 'add9', tones: [0, 4, 7, 14], steps: [1, 3, 5, 2]}, /* Cadd9 [C E G D] */
+	{suffix: 'madd9', tones: [0, 3, 7, 14], steps: [1, 3, 5, 2]}, /* Cmadd9 [C Eb G D] */
+	{suffix: 'sus2', tones: [0, 2, 7], steps: [1, 2, 5]}, /* Csus2 */
+	{suffix: 'sus', tones: [0, 2, 7], steps: [1, 2, 5]}, /* Csus */
+	{suffix: '5', tones: [0, 7], steps: [1, 5]}, /* C5 */
     ],
     clone: function (obj) {
 	if (null == obj || "object" != typeof obj)
@@ -108,13 +107,30 @@ module.exports = {
 	}
 	return result;
     },
+    get_letters_from_tones: function (root_key, tone_set) {
+	var map = [];
+	var root_tone = this.tones[root_key];
+	var alphabet_offset = this.alphabet[root_key.charAt(0)];
+	var alphabet_letters = Object.keys(this.alphabet);
+	for (var i = 0; i < tone_set.length; i++) {
+
+	    var tone = (root_tone + tone_set[i]) % 12;
+	    var letter = alphabet_letters[(i + alphabet_offset) % 7];
+
+	    for (var key in this.tones) {
+		if (tone == this.tones[key] && letter == key.charAt(0)) {
+		    map.push(key);
+		}
+	    }
+	}
+	return map;
+    },
     check_tone_set: function (tone_set, scale_set) {
 
 	var max_score = tone_set.length;
 	var current_score = 0;
 	var unfinded_tones = [];
 	var finded = false;
-
 	for (var i = 0; i < tone_set.length; i++) {
 	    finded = false;
 	    for (var j = 0; j < scale_set.length; j++) {
@@ -144,17 +160,14 @@ module.exports = {
 
 	if (typeof root_key != "string")
 	    return null;
-
 	var map = [];
 	var root_tone = this.tones[root_key];
 	var alphabet_offset = this.alphabet[root_key.charAt(0)];
 	var alphabet_letters = Object.keys(this.alphabet);
+	for (var i = 0; i < scale.tones.length; i++) {
 
-	for (var i = 0; i < scale.semitones.length; i++) {
-
-	    var tone = (root_tone + scale.semitones[i]) % 12;
+	    var tone = (root_tone + scale.tones[i]) % 12;
 	    var letter = alphabet_letters[(i + alphabet_offset) % 7];
-
 //	    console.log("Tone: %s, Letter: %s", tone, letter);
 
 	    for (var key in this.tones) {
@@ -169,7 +182,6 @@ module.exports = {
 	    var tone = (root_tone + scale.extra_tones[i]) % 12;
 	    var index = (scale.extra_steps[i] + alphabet_offset) % 7;
 	    var letter = alphabet_letters[index];
-
 //	    console.log("Extra Tone: %s, Index: %d, Letter: %s", tone, index, letter);
 
 	    for (var key in this.tones) {
@@ -180,16 +192,13 @@ module.exports = {
 	}
 
 	console.log(map);
-
 	return map;
     },
     /* Chord is a text as: "Am" */
     parse_chord: function (chord) {
 	var self = this;
-
 	if (typeof chord != "string")
 	    throw new Error("Chord parameter should be a string");
-
 	/* Get root, suffix and bass tone */
 
 	var m = chord.match(this.chord_regexp);
@@ -200,21 +209,18 @@ module.exports = {
 
 	if (m[2] == '/')
 	    m[2] = '';
-
 	var chord_tones = null;
 	var chord_steps = null;
-
 //	console.log("suffix: ", m[2]);
 
 	this.chords.every(function (chord) {
 	    if (chord.suffix == m[2]) {
-		chord_tones = self.clone(chord.semitones);
+		chord_tones = self.clone(chord.tones);
 		chord_steps = self.clone(chord.steps);
 		return false;
 	    }
 	    return true;
 	});
-
 	if (chord_tones === null) {
 	    console.log("Not recognized");
 	    return null;
@@ -231,7 +237,6 @@ module.exports = {
 		}
 		return true;
 	    });
-
 	    if (exists == false) {
 		chord_tones.push(bass_tone);
 	    }
@@ -241,7 +246,6 @@ module.exports = {
 	var chord_keys = [];
 	var alphabet_offset = this.alphabet[m[1].charAt(0)];
 	var alphabet_letters = Object.keys(this.alphabet);
-
 	chord_steps.forEach(function (step, i) {
 	    var letter = alphabet_letters[(step + alphabet_offset - 1) % 7];
 	    var key_variants = self.get_tone_by_value((chord_tones[i] + root_tone) % 12);
@@ -253,7 +257,6 @@ module.exports = {
 		return true;
 	    });
 	});
-
 	return {
 	    root_tone: root_tone,
 	    bass_tone: m[3] ? this.tones[m[3]] : null,
@@ -300,7 +303,6 @@ module.exports = {
 		if (bass_tone == this.tones[key] && scale_map.indexOf(key) > -1) {
 		    parsed_chord.bass_key = key;
 		    parsed_chord.bass_tone = bass_tone;
-
 		}
 	    }
 	}
@@ -319,101 +321,125 @@ module.exports = {
     find_scale: function (chord_set) {
 
 	console.log(chord_set);
-
-	var chord_set_semitones = [];
-	var chord_set_semitones_map = {};
-	var chord_set_keys = [];
+	var chord_set_tones = [];
+	var chord_set_tones_map = {};
 	var first_root = null;
-	var offset = 0;
 	var chord_roots = [];
 	var matched_scales = [];
-
+	var self = this;
 	if (typeof chord_set != "object")
 	    throw new Error("Chord_set parameter should be an object");
 	if (chord_set.length === 0)
 	    return null;
-
 	/* Parse chords */
 
-	for (var i = 0; i < chord_set.length; i++) {
-	    var chord = this.parse_chord(chord_set[i]);
-	    if (chord == null)
-		continue;
-
+	chord_set.every(function (chord) {
+	    var chord_object = self.parse_chord(chord);
+	    if (chord_object == null)
+		return true;
 	    if (first_root === null) {
-		first_root = chord.root_tone;
+		first_root = chord_object.root_tone;
 		offset = 12 - first_root;
 	    }
 
-	    console.log(chord);
-
-	    chord_roots.push(chord.root_key);
-	    for (var j = 0; j < chord.tones.length; j++) {
-		var absolute = (chord.tones[j] + chord.root_tone + offset) % 12;
-//		console.log("absolute: , keys: ", absolute, chord.keys[j]);
-		if (chord_set_semitones_map[absolute] !== chord.keys[j]) {
-		    chord_set_semitones_map[absolute] = chord.keys[j];
-		    chord_set_semitones.push(absolute);
+	    chord_roots.push(chord_object.root_key);
+	    for (var j = 0; j < chord_object.tones.length; j++) {
+		var absolute = (chord_object.tones[j] + chord_object.root_tone + offset) % 12;
+		if (chord_set_tones_map[absolute] == null) {
+		    chord_set_tones_map[absolute] = {
+			key: chord_object.keys[j],
+			entries: 1,
+			tone: absolute,
+		    }
+		} else {
+		    chord_set_tones_map[absolute].entries++;
 		}
 	    }
-	}
-//	console.log("chord_set_semitones: ", chord_set_semitones);
-	chord_set_semitones = Object.keys(chord_set_semitones_map);
-//	console.log("chord_set_semitones_map: ", chord_set_semitones_map);
-	for (var i = 0; i < chord_set_semitones.length; i++) {
-	    var val = chord_set_semitones_map[chord_set_semitones[i]];
-	    chord_set_keys.push(val);
+	    return true;
+	});
+	console.log("chord_set_tones_map: ", chord_set_tones_map);
+	var entries_array_mixed = [];
+	function compare(a, b) {
+	    if (a < b)
+		return 1;
+	    if (a > b)
+		return -1;
+	    return 0;
 	}
 
+	function onlyUnique(value, index, self) {
+	    return self.indexOf(value) === index;
+	}
+
+	for (var tone in chord_set_tones_map) {
+	    var entries = chord_set_tones_map[tone].entries;
+	    entries_array_mixed.push(entries);
+	}
+
+	entries_array_mixed.sort(compare);
+	var entries_array = entries_array_mixed.filter(onlyUnique);
+	var min_entry = null;
+	if (entries_array.length > 1) {
+	    min_entry = entries_array[1];
+	} else if (entries_array.length == 1) {
+	    min_entry = entries_array[0];
+	} else {
+	    min_entry = 0;
+	}
+
+	console.log("min_entry: ", min_entry);
 	/* Begining from each tone do scales matching */
 
 	var minimal_score = 12;
+	/* Check only keys with maximal weight */
 
+	var chord_set_tones = Object.keys(chord_set_tones_map);
+	var i = 0;
+	do {
+	    console.log(chord_set_tones_map[chord_set_tones[0]]);
+	    console.log(chord_set_tones);
 
-	for (var i = 0; i < chord_set_semitones.length; i++) {
+	    if (chord_set_tones_map[chord_set_tones[0]].entries < min_entry){
+		chord_set_tones = this.arrayRotate(chord_set_tones, false);
+		continue;
+	    }
+		
+	    /* Do job */
 
-	    chord_set_semitones = this.arrayRotate(chord_set_semitones, false);
-	    chord_set_keys = this.arrayRotate(chord_set_keys, false);
+	    var current_root = chord_set_tones_map[chord_set_tones[0]];
+	    console.log("current_root: ", current_root);
+	    
 
-	    var new_semitones = chord_set_semitones.slice(0);
-	    offset = new_semitones[0];
-	    var current_root = (first_root + offset) % 12;
-	    for (var j = 0; j < new_semitones.length; j++) {
-		new_semitones[j] -= offset;
-		if (new_semitones[j] < 0) {
-		    new_semitones[j] += 12;
-		}
+	    var new_tones_set = chord_set_tones.slice(0);
+	    var offset = new_tones_set[0];
+	    for (var j = 0; j < new_tones_set.length; j++) {
+		new_tones_set[j] -= offset;
+		new_tones_set[j] = new_tones_set[j] < 0 ? new_tones_set[j] += 12 : new_tones_set[j];
 	    }
 
-	    for (var j = 0; j < this.scales.length; j++) {
+	    console.log("new_tones_set:", new_tones_set);
 
-		var tone_set_check = this.check_tone_set(new_semitones, this.scales[j].semitones);
-
+	    self.scales.every(function (scale, scale_index) {
+		var tone_set_check = self.check_tone_set(new_tones_set, scale.tones);
+		console.log("tone_set_check:", tone_set_check);
 		if (minimal_score >= tone_set_check.score) {
-		    minimal_score = tone_set_check.score;
 
 		    var general_keys = [];
 		    var extra_keys = [];
 		    var extra_steps = [];
+		    console.log("scale.tones: ", scale.tones);
 
-		    for (var k = 0; k < this.scales[j].semitones.length; k++) {
-			var general_tone_pos = new_semitones.indexOf(this.scales[j].semitones[k]);
-			var general_key = chord_set_keys[general_tone_pos];
-			general_keys.push(general_key);
-		    }
+		    general_keys = self.get_letters_from_tones(current_root.key, scale.tones);
 
-		    var root_key_offset = this.alphabet[general_keys[0].charAt(0)];
-
-//		    console.log("chord_set_keys: ", chord_set_keys);
+		    console.log("general_keys: ", general_keys);
+		    var root_key_offset = self.alphabet[general_keys[0].charAt(0)];
 		    for (var k = 0; k < tone_set_check.extra_tones.length; k++) {
-			var extra_tone_pos = new_semitones.indexOf(tone_set_check.extra_tones[k]);
-//			console.log("extra_tone_pos: ", extra_tone_pos);
-			var extra_key = chord_set_keys[extra_tone_pos];
-//			console.log("extra_key: ", extra_key);
+			if (typeof chord_set_tones_map[tone_set_check.extra_tones[k]] == "undefined")
+			    continue;
+			var extra_key = chord_set_tones_map[tone_set_check.extra_tones[k]].key;
+			console.log("extra_key: ", extra_key);
 			extra_keys.push(extra_key);
-
-			var extra_key_offset = this.alphabet[extra_key.charAt(0)];
-
+			var extra_key_offset = self.alphabet[extra_key.charAt(0)];
 			var relative_root = extra_key_offset - root_key_offset;
 			if (relative_root < 0)
 			    relative_root += 7;
@@ -423,33 +449,37 @@ module.exports = {
 			extra_steps.push(extra_step);
 		    }
 
-		    matched_scales.push({
-			root_tone: current_root,
+		    var scale_object = {
 			root_key: general_keys[0],
-			scale_index: j,
-			compare: tone_set_check.score,
-			semitones: this.scales[j].semitones,
+			scale: scale_index,
+			tones: scale.tones,
 			keys: general_keys,
 			extra_tones: tone_set_check.extra_tones,
 			extra_keys: extra_keys,
 			extra_steps: extra_steps,
-		    });
+		    };
+		    if (minimal_score > tone_set_check.score) {
+			matched_scales = [];
+		    }
+		    matched_scales.push(scale_object);
+		    minimal_score = tone_set_check.score;
 		}
-	    }
-	}
+		return true;
+	    });
 
+	    chord_set_tones = this.arrayRotate(chord_set_tones, false);
+	    console.log("chord_set_tones: ", chord_set_tones);
+	} while (i++ < chord_set_tones.length);
+
+
+	console.log(matched_scales);
 	for (var i = 0; i < chord_roots.length; i++) {
 	    for (var j = 0; j < matched_scales.length; j++) {
-
-		if (matched_scales[j].compare > minimal_score) {
-		    continue;
-		}
-
 		if (chord_roots[i] === matched_scales[j].root_key) {
 		    return {
 			root_key: matched_scales[j].root_key,
-			scale: matched_scales[j].scale_index,
-			semitones: matched_scales[j].semitones,
+			scale: matched_scales[j].scale,
+			tones: matched_scales[j].tones,
 			keys: matched_scales[j].keys,
 			extra_tones: matched_scales[j].extra_tones,
 			extra_keys: matched_scales[j].extra_keys,
@@ -468,10 +498,8 @@ module.exports = {
 	    throw new Error("Chord_set parameter should be an object");
 	if (typeof new_root_key != "string")
 	    throw new Error("New_root_tone parameter should be a string");
-
 	var transpose_map = {};
 	var scale = this.find_scale(chord_set);
-
 //	console.log(scale);
 
 	if (scale) {
@@ -479,7 +507,6 @@ module.exports = {
 	    /* We found scale an root tone */
 
 	    steps = this.tones[new_root_key] - this.tones[scale.root_key];
-
 	} else {
 
 	    /* Scale and root tone did not determined, use first chord as root 
@@ -501,7 +528,6 @@ module.exports = {
 	}
 
 	var scale_map = this.create_scale_map(new_root_key, scale);
-
 	for (var i = 0; i < chord_set.length; i++) {
 	    var new_chord = this.shift_chord(chord_set[i], steps, scale_map);
 	    transpose_map[chord_set[i]] = new_chord;

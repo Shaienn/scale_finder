@@ -1,4 +1,4 @@
-var sf = require('scale_finder');
+var sf = require('../scale_finder.js');
 var assert = require('assert');
 var should = require('should');
 
@@ -14,13 +14,12 @@ function clone(obj) {
 }
 
 describe('sf', function () {
-    it('should be have #find_scale', function () {
-	sf.should.have.property('find_scale');
-    });
+
+    console.log(sf);
 
     it('each chord should have equal number of steps and semitones', function () {
 	sf.chords.forEach(function (chord) {
-	    chord.semitones.length.should.be.equal(chord.steps.length);
+	    chord.tones.length.should.be.equal(chord.steps.length);
 	});
     });
 
@@ -44,7 +43,7 @@ describe('sf', function () {
 
 		    chord.steps.forEach(function (step, i) {
 			var letter = alphabet_letters[(step + alphabet_offset - 1) % 7];
-			var key_variants = sf.get_tone_by_value((chord.semitones[i] + root_tone) % 12);
+			var key_variants = sf.get_tone_by_value((chord.tones[i] + root_tone) % 12);
 			key_variants.forEach(function (variant) {
 			    if (letter == variant.charAt(0)) {
 				keys.push(variant);
@@ -57,7 +56,7 @@ describe('sf', function () {
 			bass_tone: null,
 			root_key: root_key,
 			bass_key: null,
-			tones: chord.semitones,
+			tones: chord.tones,
 			keys: keys,
 			suffix: chord.suffix,
 		    });
@@ -67,7 +66,7 @@ describe('sf', function () {
 	    return true;
 	});
     });
-    
+
     it('chords with bass parsing', function () {
 	this.timeout(3000);
 	var root_keys = [];
@@ -92,7 +91,7 @@ describe('sf', function () {
 			    var keys = [];
 			    var root_tone = sf.tones[root_key];
 			    var bass_tone = sf.tones[bass_key];
-			    var chord_tones = clone(chord.semitones);
+			    var chord_tones = clone(chord.tones);
 
 			    chord.steps.forEach(function (step, i) {
 				var letter = alphabet_letters[(step + alphabet_offset - 1) % 7];
@@ -115,7 +114,7 @@ describe('sf', function () {
 			    if (exists == false) {
 				chord_tones.push(bass_tone_in_chord);
 			    }
-			    
+
 			    sf.parse_chord(chord_name).should.eql({
 				root_tone: root_tone,
 				bass_tone: bass_tone,
@@ -134,50 +133,64 @@ describe('sf', function () {
 	});
     });
 
-//    it('scale parsing', function () {
-//	var chord_set = ['B',
-//	    'F#/B',
-//	    'B',
-//	    'F#/B',
-//	    'B',
-//	    'E/B',
-//	    'F#/B',
-//	    'B',
-//	    'E/B',
-//	    'F#/B',
-//	    'B',
-//	    'E/B',
-//	    'F#/B',
-//	    'B',
-//	    'E',
-//	    'F#sus2',
-//	    'F#',
-//	    'B',
-//	    'E',
-//	    'B',
-//	    'G#m',
-//	    'F#sus2',
-//	    'F#',
-//	    'E',
-//	    'B',
-//	    'E',
-//	    'F#',
-//	    'B',
-//	    'E',
-//	    'B',
-//	    'F#',
-//	    'C#m',
-//	    'E',
-//	    'B',
-//	    'E',
-//	    'C#m',
-//	    'E',
-//	    'B',
-//	    'F#',
-//	    'C#m'];
-//
-//	sf.find_scale(chord_set);
-//    });
+    it('scale parsing', function () {
+
+	var chord_set_1 = ['Am', 'F', 'C', 'G'];
+	sf.find_scale(chord_set_1).should.eql(
+		{
+		    root_key: 'A',
+		    scale: 1,
+		    tones: [0, 2, 3, 5, 7, 8, 10],
+		    keys: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
+		    extra_tones: [],
+		    extra_keys: [],
+		    extra_steps: []
+		});
+
+	var chord_set_2 = ['G',
+	    'C',
+	    'Em',
+	    'D',
+	    'G',
+	    'C',
+	    'Em',
+	    'D',
+	    'G',
+	    'C',
+	    'Em',
+	    'D',
+	    'C',
+	    'G/H',
+	    'Am',
+	    'Hm',
+	    'C',
+	    'G',
+	    'F/A',
+	    'D',
+	    'G',
+	    'C',
+	    'Em',
+	    'D',
+	    'G',
+	    'C',
+	    'Em',
+	    'D',
+	    'Eb',
+	    'F',
+	    'Eb',
+	    'F'];
+	sf.find_scale(chord_set_2).should.eql(
+		{
+		    extra_keys: ['Bb', 'Eb', 'F'],
+		    extra_steps: [2, 5, 6],
+		    extra_tones: [3, 8, 10],
+		    keys: ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
+		    root_key: 'G',
+		    scale: 0,
+		    tones: [0, 2, 4, 5, 7, 9, 11]
+		});
+
+    });
 
 
 });
