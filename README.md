@@ -17,7 +17,7 @@ To recognize a chord just send it to function "parse_chord".
         root_key: 'A',
         bass_key: 'G',
         tones: [ 0, 3, 7, 10 ],
-        keys: [ 'A', 'C', 'E' ],
+        keys: [ 'A', 'C', 'E', 'G' ],
         suffix: 'm' 
     }
     
