@@ -2,6 +2,8 @@
 
 This is the module to recognize chords and scales and perform correct transpose to another scale. 
 
+    npm install scale_finder --save
+
 # Chord parsing
 To recognize a chord just send it to function "parse_chord".
 ## Example 1:
