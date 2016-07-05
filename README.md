@@ -46,6 +46,7 @@ To find scale put array of chords to the "find_scale" function:
 ##Example 3 - G major with out of scale Eb and F chords.
     var chords = [ 'G', 'C', 'Em', 'D', 'C', 'G', 'Am', 'Hm', 'Eb', 'F' ];
     var scale_object = find_scale(chords);
+    console.log(scale_object);
     { 
         root_key: 'G',
         scale: 0,
