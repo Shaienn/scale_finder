@@ -170,6 +170,7 @@ module.exports = {
 	};
     },
     /* Chord is a text as: "Am" */
+
     parse_chord: function (chord) {
 	var self = this;
 	if (typeof chord != "string")
@@ -184,6 +185,7 @@ module.exports = {
 
 	if (m[2] == '/')
 	    m[2] = '';
+
 	/* Force to convert H key to B key */
 
 	if (m[1] == "H")
@@ -223,10 +225,8 @@ module.exports = {
 
 	var root_tone = this.tones[m[1]];
 	var chord_keys = self.get_letters(m[1], chord_tones, chord_steps);
-	if (m[3].length > 0) {
-	    if (chord_keys.indexOf(m[3]) == -1) {
-		chord_keys.push(m[3]);
-	    }
+	if (m[3].length > 0 && chord_keys.indexOf(m[3]) == -1) {
+	    chord_keys.push(m[3]);
 	}
 
 	return {
