@@ -48,13 +48,16 @@ module.exports = {
 	'F': 5,
 	'F#': 6,
 	'F##': 7,
+	'Gbb': 5,
 	'Gb': 6,
 	'G': 7,
 	'G#': 8,
 	'G##': 9,
+	'Abb': 7,
 	'Ab': 8,
 	'A': 9,
 	'A#': 10,
+	'A##': 11,
 	'Bb': 10,
 	'B': 11,
 	'B#': 0,
@@ -220,6 +223,12 @@ module.exports = {
 
 	var root_tone = this.tones[m[1]];
 	var chord_keys = self.get_letters(m[1], chord_tones, chord_steps);
+	if (m[3].length > 0) {
+	    if (chord_keys.indexOf(m[3]) == -1) {
+		chord_keys.push(m[3]);
+	    }
+	}
+
 	return {
 	    root_tone: root_tone,
 	    bass_tone: m[3] ? this.tones[m[3]] : null,
@@ -341,13 +350,13 @@ module.exports = {
 	/* Begining from each tone do scales matching */
 
 	var minimal_score = 12;
-	
+
 	/* Check only keys with maximal weight */
 
 	var chord_set_tones = Object.keys(chord_set_tones_map);
 	var i = 0;
 	do {
-	    
+
 	    if (chord_set_tones_map[chord_set_tones[0]].entries < min_entry) {
 		chord_set_tones = arrayRotate(chord_set_tones, false);
 		continue;

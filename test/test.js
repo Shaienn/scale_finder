@@ -116,6 +116,10 @@ describe('sf', function () {
 				chord_tones.push(bass_tone_in_chord);
 			    }
 
+			    if (keys.indexOf(bass_key) == -1) {
+				keys.push(bass_key);
+			    }
+
 			    sf.parse_chord(chord_name).should.eql({
 				root_tone: root_tone,
 				bass_tone: bass_tone,
@@ -224,13 +228,13 @@ describe('sf', function () {
 		});
 
     });
-    
+
     it('transpose', function () {
-	
+
 	var chord_set_1 = ['Am', 'F', 'C', 'G'];
 	var map = sf.transpose(chord_set_1, "B");
 	console.log(map);
-	
+
     });
 
 
