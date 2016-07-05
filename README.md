@@ -8,7 +8,7 @@ This is the module to recognize chords and scales and perform correct transpose 
 To recognize a chord just send it to function "parse_chord".
 ## Example 1:
 
-    var sf = require('../scale_finder.js');
+    var sf = require('scale_finder');
     var chord = "Am/G"
     var chord_object = sf.parse_chord(chord);
     console.log(chord_object):
@@ -35,7 +35,7 @@ To recognize a chord just send it to function "parse_chord".
 To find scale put array of chords to the "find_scale" function:
 ##Example 2 - Straight D major: 
 
-    var sf = require('../scale_finder.js');
+    var sf = require('scale_finder');
     var chords = [ 'D', 'A', 'Bm', 'G' ];
     var scale_object = sf.find_scale(chords);
     console.log(scale_object);
@@ -50,7 +50,7 @@ To find scale put array of chords to the "find_scale" function:
     }
 ##Example 3 - G major with out of scale Eb and F chords.
 
-    var sf = require('../scale_finder.js');
+    var sf = require('scale_finder');
     var chords = [ 'G', 'C', 'Em', 'D', 'C', 'G', 'Am', 'Hm', 'Eb', 'F' ];
     var scale_object = sf.find_scale(chords);
     console.log(scale_object);
@@ -69,7 +69,7 @@ To transpose chords sequence to another key, put chords array and new root key t
 Transpose function returns transpose map:
 ##Example 4 - Straight A minor to B minor:
 
-    var sf = require('../scale_finder.js');
+    var sf = require('scale_finder');
     var chords = [ 'Am', 'F', 'C', 'G' ];
     var scale_object = sf.transpose(chords, "B");
     console.log(scale_object);
