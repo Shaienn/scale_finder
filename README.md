@@ -3,8 +3,7 @@
 This is the module to recognize chords and scales and perform correct transpose to another scale. 
 
 # Chord parsing
-
-    To recognize a chord just send it to function "parse_chord".
+To recognize a chord just send it to function "parse_chord".
 ## Example 1:
 
     var chord = "Am/G"
@@ -21,7 +20,6 @@ This is the module to recognize chords and scales and perform correct transpose 
     }
     
 ## Chord object contains:
-
     root_tone - absolute root tone value according to tones table.
     bass_tone - if bass tone exists contains absolute bass tone according tones table or null if not exists
     root_key - letter of root tone, because it is possible to have same tone but different letters (ex: A# and Gb)
