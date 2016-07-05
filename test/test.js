@@ -23,6 +23,7 @@ describe('sf', function () {
 	});
     });
 
+
     it('simple chords parsing', function () {
 	var root_keys = [];
 	var alphabet_letters = Object.keys(sf.alphabet);
@@ -190,6 +191,46 @@ describe('sf', function () {
 		    tones: [0, 2, 4, 5, 7, 9, 11]
 		});
 
+
+	var chord_set_3 = ['Hm',
+	    'G',
+	    'D',
+	    'A',
+	    'Hm',
+	    'G',
+	    'D',
+	    'G',
+	    'D/F#',
+	    'G',
+	    'Hm',
+	    'A/C#',
+	    'G',
+	    'D/F#',
+	    'Hm',
+	    'A/C#',
+	    'Hm',
+	    'G',
+	    'D',
+	    'A'];
+	sf.find_scale(chord_set_3).should.eql(
+		{
+		    extra_keys: [],
+		    extra_steps: [],
+		    extra_tones: [],
+		    keys: ['B', 'C#', 'D', 'E', 'F#', 'G', 'A'],
+		    root_key: 'B',
+		    scale: 1,
+		    tones: [0, 2, 3, 5, 7, 8, 10]
+		});
+
+    });
+    
+    it('transpose', function () {
+	
+	var chord_set_1 = ['Am', 'F', 'C', 'G'];
+	var map = sf.transpose(chord_set_1, "B");
+	console.log(map);
+	
     });
 
 

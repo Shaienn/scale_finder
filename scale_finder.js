@@ -1,3 +1,33 @@
+function arrayRotate(arr, reverse) {
+    if (reverse)
+	arr.unshift(arr.pop());
+    else
+	arr.push(arr.shift());
+    return arr;
+}
+
+function clone(obj) {
+    if (null == obj || "object" != typeof obj)
+	return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+	if (obj.hasOwnProperty(attr))
+	    copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
+function compare(a, b) {
+    if (a < b)
+	return 1;
+    if (a > b)
+	return -1;
+    return 0;
+}
+
+function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+}
 
 module.exports = {
     chord_regexp: /^([A-H]{1}[b\#]?)([augjnidsm+\-1-9]+[\/]+[augjnidsm+\-1-9]+|[augjnidsm+\-1-9]*)(?:\/?)([A-H]?[b\#]?)/,
@@ -28,21 +58,18 @@ module.exports = {
 	'Bb': 10,
 	'B': 11,
 	'B#': 0,
-	'Hb': 10,
-	'H': 11,
-	'H#': 0,
     },
-    alphabet: {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 1},
+    alphabet: {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6},
     scales: [
-	{name: 'Major', tones: [0, 2, 4, 5, 7, 9, 11]},
-	{name: 'Natural minor', tones: [0, 2, 3, 5, 7, 8, 10]},
-	{name: 'Harmonic minor', tones: [0, 2, 3, 5, 7, 8, 11]},
-	{name: 'Melodic minor', tones: [0, 2, 3, 5, 7, 9, 11]},
-	{name: 'Dorian', tones: [0, 2, 3, 5, 7, 9, 10]},
-	{name: 'Phrygian', tones: [0, 1, 3, 5, 7, 8, 10]},
-	{name: 'Lidian', tones: [0, 2, 4, 6, 7, 9, 11]},
-	{name: 'Mixolidian', tones: [0, 2, 4, 5, 7, 9, 10]},
-	{name: 'Locrian', tones: [0, 1, 3, 5, 6, 8, 10]},
+	{name: 'Major', tones: [0, 2, 4, 5, 7, 9, 11], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Natural minor', tones: [0, 2, 3, 5, 7, 8, 10], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Harmonic minor', tones: [0, 2, 3, 5, 7, 8, 11], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Melodic minor', tones: [0, 2, 3, 5, 7, 9, 11], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Dorian', tones: [0, 2, 3, 5, 7, 9, 10], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Phrygian', tones: [0, 1, 3, 5, 7, 8, 10], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Lidian', tones: [0, 2, 4, 6, 7, 9, 11], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Mixolidian', tones: [0, 2, 4, 5, 7, 9, 10], steps: [1, 2, 3, 4, 5, 6, 7]},
+	{name: 'Locrian', tones: [0, 1, 3, 5, 6, 8, 10], steps: [1, 2, 3, 4, 5, 6, 7]},
     ],
     chords: [
 	{suffix: '', tones: [0, 4, 7], steps: [1, 3, 5]}, /* C [C E G]*/
@@ -87,16 +114,6 @@ module.exports = {
 	{suffix: 'sus', tones: [0, 2, 7], steps: [1, 2, 5]}, /* Csus */
 	{suffix: '5', tones: [0, 7], steps: [1, 5]}, /* C5 */
     ],
-    clone: function (obj) {
-	if (null == obj || "object" != typeof obj)
-	    return obj;
-	var copy = obj.constructor();
-	for (var attr in obj) {
-	    if (obj.hasOwnProperty(attr))
-		copy[attr] = obj[attr];
-	}
-	return copy;
-    },
     get_tone_by_value: function (value) {
 	var result = [];
 	for (var prop in this.tones) {
@@ -107,19 +124,19 @@ module.exports = {
 	}
 	return result;
     },
-    get_letters_from_tones: function (root_key, tone_set) {
+    get_letters: function (root_key, tones, steps) {
+	var self = this;
 	var map = [];
 	var root_tone = this.tones[root_key];
 	var alphabet_offset = this.alphabet[root_key.charAt(0)];
 	var alphabet_letters = Object.keys(this.alphabet);
-	for (var i = 0; i < tone_set.length; i++) {
-
-	    var tone = (root_tone + tone_set[i]) % 12;
-	    var letter = alphabet_letters[(i + alphabet_offset) % 7];
-
-	    for (var key in this.tones) {
-		if (tone == this.tones[key] && letter == key.charAt(0)) {
-		    map.push(key);
+	for (var i = 0; i < tones.length; i++) {
+	    var letter = alphabet_letters[(steps[i] + alphabet_offset - 1) % 7];
+	    var variants = self.get_tone_by_value((root_tone + tones[i]) % 12);
+	    for (var index in variants) {
+		if (letter == variants[index].charAt(0)) {
+		    map.push(variants[index]);
+		    break;
 		}
 	    }
 	}
@@ -149,51 +166,6 @@ module.exports = {
 	    extra_tones: unfinded_tones
 	};
     },
-    arrayRotate: function (arr, reverse) {
-	if (reverse)
-	    arr.unshift(arr.pop());
-	else
-	    arr.push(arr.shift());
-	return arr;
-    },
-    create_scale_map: function (root_key, scale) {
-
-	if (typeof root_key != "string")
-	    return null;
-	var map = [];
-	var root_tone = this.tones[root_key];
-	var alphabet_offset = this.alphabet[root_key.charAt(0)];
-	var alphabet_letters = Object.keys(this.alphabet);
-	for (var i = 0; i < scale.tones.length; i++) {
-
-	    var tone = (root_tone + scale.tones[i]) % 12;
-	    var letter = alphabet_letters[(i + alphabet_offset) % 7];
-//	    console.log("Tone: %s, Letter: %s", tone, letter);
-
-	    for (var key in this.tones) {
-		if (tone == this.tones[key] && letter == key.charAt(0)) {
-		    map.push(key);
-		}
-	    }
-	}
-
-	for (var i = 0; i < scale.extra_tones.length; i++) {
-
-	    var tone = (root_tone + scale.extra_tones[i]) % 12;
-	    var index = (scale.extra_steps[i] + alphabet_offset) % 7;
-	    var letter = alphabet_letters[index];
-//	    console.log("Extra Tone: %s, Index: %d, Letter: %s", tone, index, letter);
-
-	    for (var key in this.tones) {
-		if (tone == this.tones[key] && letter == key.charAt(0)) {
-		    map.push(key);
-		}
-	    }
-	}
-
-	console.log(map);
-	return map;
-    },
     /* Chord is a text as: "Am" */
     parse_chord: function (chord) {
 	var self = this;
@@ -209,14 +181,18 @@ module.exports = {
 
 	if (m[2] == '/')
 	    m[2] = '';
+	/* Force to convert H key to B key */
+
+	if (m[1] == "H")
+	    m[1] = "B";
+	if (m[3] == "H")
+	    m[3] = "B";
 	var chord_tones = null;
 	var chord_steps = null;
-//	console.log("suffix: ", m[2]);
-
 	this.chords.every(function (chord) {
 	    if (chord.suffix == m[2]) {
-		chord_tones = self.clone(chord.tones);
-		chord_steps = self.clone(chord.steps);
+		chord_tones = clone(chord.tones);
+		chord_steps = clone(chord.steps);
 		return false;
 	    }
 	    return true;
@@ -243,20 +219,7 @@ module.exports = {
 	}
 
 	var root_tone = this.tones[m[1]];
-	var chord_keys = [];
-	var alphabet_offset = this.alphabet[m[1].charAt(0)];
-	var alphabet_letters = Object.keys(this.alphabet);
-	chord_steps.forEach(function (step, i) {
-	    var letter = alphabet_letters[(step + alphabet_offset - 1) % 7];
-	    var key_variants = self.get_tone_by_value((chord_tones[i] + root_tone) % 12);
-	    key_variants.every(function (variant) {
-		if (letter == variant.charAt(0)) {
-		    chord_keys.push(variant);
-		    return false;
-		}
-		return true;
-	    });
-	});
+	var chord_keys = self.get_letters(m[1], chord_tones, chord_steps);
 	return {
 	    root_tone: root_tone,
 	    bass_tone: m[3] ? this.tones[m[3]] : null,
@@ -319,13 +282,12 @@ module.exports = {
     /* Incoming sequence is array: ["Am", "F", "C", "G"] */
 
     find_scale: function (chord_set) {
-
-	console.log(chord_set);
 	var chord_set_tones = [];
 	var chord_set_tones_map = {};
 	var first_root = null;
 	var chord_roots = [];
 	var matched_scales = [];
+	var entries_array_mixed = [];
 	var self = this;
 	if (typeof chord_set != "object")
 	    throw new Error("Chord_set parameter should be an object");
@@ -357,19 +319,8 @@ module.exports = {
 	    }
 	    return true;
 	});
-	console.log("chord_set_tones_map: ", chord_set_tones_map);
-	var entries_array_mixed = [];
-	function compare(a, b) {
-	    if (a < b)
-		return 1;
-	    if (a > b)
-		return -1;
-	    return 0;
-	}
 
-	function onlyUnique(value, index, self) {
-	    return self.indexOf(value) === index;
-	}
+
 
 	for (var tone in chord_set_tones_map) {
 	    var entries = chord_set_tones_map[tone].entries;
@@ -387,29 +338,24 @@ module.exports = {
 	    min_entry = 0;
 	}
 
-	console.log("min_entry: ", min_entry);
 	/* Begining from each tone do scales matching */
 
 	var minimal_score = 12;
+	
 	/* Check only keys with maximal weight */
 
 	var chord_set_tones = Object.keys(chord_set_tones_map);
 	var i = 0;
 	do {
-	    console.log(chord_set_tones_map[chord_set_tones[0]]);
-	    console.log(chord_set_tones);
-
-	    if (chord_set_tones_map[chord_set_tones[0]].entries < min_entry){
-		chord_set_tones = this.arrayRotate(chord_set_tones, false);
+	    
+	    if (chord_set_tones_map[chord_set_tones[0]].entries < min_entry) {
+		chord_set_tones = arrayRotate(chord_set_tones, false);
 		continue;
 	    }
-		
+
 	    /* Do job */
 
 	    var current_root = chord_set_tones_map[chord_set_tones[0]];
-	    console.log("current_root: ", current_root);
-	    
-
 	    var new_tones_set = chord_set_tones.slice(0);
 	    var offset = new_tones_set[0];
 	    for (var j = 0; j < new_tones_set.length; j++) {
@@ -417,27 +363,19 @@ module.exports = {
 		new_tones_set[j] = new_tones_set[j] < 0 ? new_tones_set[j] += 12 : new_tones_set[j];
 	    }
 
-	    console.log("new_tones_set:", new_tones_set);
-
 	    self.scales.every(function (scale, scale_index) {
 		var tone_set_check = self.check_tone_set(new_tones_set, scale.tones);
-		console.log("tone_set_check:", tone_set_check);
 		if (minimal_score >= tone_set_check.score) {
 
 		    var general_keys = [];
 		    var extra_keys = [];
 		    var extra_steps = [];
-		    console.log("scale.tones: ", scale.tones);
-
-		    general_keys = self.get_letters_from_tones(current_root.key, scale.tones);
-
-		    console.log("general_keys: ", general_keys);
+		    general_keys = self.get_letters(current_root.key, scale.tones, scale.steps);
 		    var root_key_offset = self.alphabet[general_keys[0].charAt(0)];
 		    for (var k = 0; k < tone_set_check.extra_tones.length; k++) {
 			if (typeof chord_set_tones_map[tone_set_check.extra_tones[k]] == "undefined")
 			    continue;
 			var extra_key = chord_set_tones_map[tone_set_check.extra_tones[k]].key;
-			console.log("extra_key: ", extra_key);
 			extra_keys.push(extra_key);
 			var extra_key_offset = self.alphabet[extra_key.charAt(0)];
 			var relative_root = extra_key_offset - root_key_offset;
@@ -467,12 +405,9 @@ module.exports = {
 		return true;
 	    });
 
-	    chord_set_tones = this.arrayRotate(chord_set_tones, false);
-	    console.log("chord_set_tones: ", chord_set_tones);
+	    chord_set_tones = arrayRotate(chord_set_tones, false);
 	} while (i++ < chord_set_tones.length);
 
-
-	console.log(matched_scales);
 	for (var i = 0; i < chord_roots.length; i++) {
 	    for (var j = 0; j < matched_scales.length; j++) {
 		if (chord_roots[i] === matched_scales[j].root_key) {
@@ -493,6 +428,7 @@ module.exports = {
 	return null;
     },
     transpose: function (chord_set, new_root_key) {
+	var self = this;
 	var steps = 0;
 	if (typeof chord_set != "object")
 	    throw new Error("Chord_set parameter should be an object");
@@ -500,7 +436,6 @@ module.exports = {
 	    throw new Error("New_root_tone parameter should be a string");
 	var transpose_map = {};
 	var scale = this.find_scale(chord_set);
-//	console.log(scale);
 
 	if (scale) {
 
@@ -527,7 +462,14 @@ module.exports = {
 	    steps = this.tones[new_root_key] - parsed_chord.root_tone;
 	}
 
-	var scale_map = this.create_scale_map(new_root_key, scale);
+	var scale_map = scale.keys;
+	if (scale.extra_tones.length > 0 && scale.extra_steps.length > 0) {
+	    var extra_map = self.get_letters(new_root_key,
+		    scale.extra_tones, scale.extra_steps);
+	    scale_map = scale_map.concat(extra_map);
+	}
+
+
 	for (var i = 0; i < chord_set.length; i++) {
 	    var new_chord = this.shift_chord(chord_set[i], steps, scale_map);
 	    transpose_map[chord_set[i]] = new_chord;
