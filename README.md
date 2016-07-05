@@ -59,4 +59,19 @@ To find scale put array of chords to the "find_scale" function:
         extra_steps: [ 2, 5, 6 ] 
     }
 
+#Transpose
+To transpose chords sequence to another key, put chords array and new root key to "transpose" function.
+Transpose function returns transpose map:
+##Example 4 - Straight A minor to B minor: 
+    var chords = [ 'Am', 'F', 'C', 'G' ];
+    var scale_object = transpose(chords, "B");
+    console.log(scale_object);
+    { 
+        Am: 'Bm', 
+        F: 'G', 
+        C: 'D', 
+        G: 'A' 
+    }
+
+
 
