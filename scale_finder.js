@@ -359,6 +359,7 @@ module.exports = {
 
 	    if (chord_set_tones_map[chord_set_tones[0]].entries < min_entry) {
 		chord_set_tones = arrayRotate(chord_set_tones, false);
+		i++;
 		continue;
 	    }
 
@@ -471,13 +472,7 @@ module.exports = {
 	    steps = this.tones[new_root_key] - parsed_chord.root_tone;
 	}
 
-	var scale_map = scale.keys;
-	if (scale.extra_tones.length > 0 && scale.extra_steps.length > 0) {
-	    var extra_map = self.get_letters(new_root_key,
-		    scale.extra_tones, scale.extra_steps);
-	    scale_map = scale_map.concat(extra_map);
-	}
-
+	var scale_map = scale.keys.concat(scale.extra_keys);
 
 	for (var i = 0; i < chord_set.length; i++) {
 	    var new_chord = this.shift_chord(chord_set[i], steps, scale_map);

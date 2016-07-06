@@ -235,7 +235,10 @@ describe('sf', function () {
 	var map = sf.transpose(chord_set_1, "B");
 	console.log(map);
 
+	var chord_set_2 = ['G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'C', 'G/H', 'Am', 'Hm', 'C', 'G', 'F/A', 'D', 'G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'Eb', 'F', 'Eb', 'F'];
+
+	var map = sf.transpose(['G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'C', 'G/H', 'Am', 'Hm', 'C', 'G', 'F/A', 'D', 'G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'Eb', 'F', 'Eb', 'F'], "C");
+	console.log(map);
+
     });
-
-
 });
