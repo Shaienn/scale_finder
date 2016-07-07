@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 function arrayRotate(arr, reverse) {
     if (reverse)
 	arr.unshift(arr.pop());
@@ -58,6 +60,7 @@ module.exports = {
 	'A': 9,
 	'A#': 10,
 	'A##': 11,
+	'Bbb': 9,
 	'Bb': 10,
 	'B': 11,
 	'B#': 0,
@@ -128,6 +131,10 @@ module.exports = {
 	return result;
     },
     get_letters: function (root_key, tones, steps) {
+
+	assert.ok(typeof root_key == 'string', "Root key should be a string");
+	assert.ok(tones.length == steps.length, "Tones and steps should contain equal items");
+
 	var self = this;
 	var map = [];
 	var root_tone = this.tones[root_key];
@@ -173,8 +180,9 @@ module.exports = {
 
     parse_chord: function (chord) {
 	var self = this;
-	if (typeof chord != "string")
-	    throw new Error("Chord parameter should be a string");
+
+	assert.ok(typeof chord == 'string', "Chord should be a string");
+
 	/* Get root, suffix and bass tone */
 
 	var m = chord.match(this.chord_regexp);
@@ -241,10 +249,9 @@ module.exports = {
     },
     shift_chord: function (chord, steps, scale_map) {
 
-	if (typeof chord != "string")
-	    throw new Error("Chord parameter should be a string");
-	if (isNaN(steps))
-	    throw new Error("Steps should be a number");
+	assert.ok(typeof chord == 'string', "Chord should be a string");
+	assert.ok(typeof steps == 'number', "Steps should be a number");
+
 	var parsed_chord = this.parse_chord(chord);
 	if (parsed_chord == null) {
 	    return null;
@@ -267,6 +274,7 @@ module.exports = {
 	    if (root_tone == this.tones[key] && scale_map.indexOf(key) > -1) {
 		parsed_chord.root_key = key;
 		parsed_chord.root_tone = root_tone;
+		break;
 	    }
 	}
 
@@ -298,9 +306,8 @@ module.exports = {
 	var matched_scales = [];
 	var entries_array_mixed = [];
 	var self = this;
-	if (typeof chord_set != "object")
-	    throw new Error("Chord_set parameter should be an object");
-	if (chord_set.length === 0)
+
+	if (chord_set.length == 0)
 	    return null;
 	/* Parse chords */
 
@@ -391,7 +398,7 @@ module.exports = {
 			var relative_root = extra_key_offset - root_key_offset;
 			if (relative_root < 0)
 			    relative_root += 7;
-			var extra_step = (extra_key_offset - root_key_offset) % 7;
+			var extra_step = (extra_key_offset - root_key_offset + 1) % 7;
 			if (extra_step < 0)
 			    extra_step += 7;
 			extra_steps.push(extra_step);
@@ -440,10 +447,13 @@ module.exports = {
     transpose: function (chord_set, new_root_key) {
 	var self = this;
 	var steps = 0;
-	if (typeof chord_set != "object")
-	    throw new Error("Chord_set parameter should be an object");
-	if (typeof new_root_key != "string")
-	    throw new Error("New_root_tone parameter should be a string");
+
+	assert.ok(typeof new_root_key == 'string', "Root key should be a string");
+
+	if (chord_set.length == 0)
+	    return null;
+
+
 	var transpose_map = {};
 	var scale = this.find_scale(chord_set);
 
@@ -472,10 +482,12 @@ module.exports = {
 	    steps = this.tones[new_root_key] - parsed_chord.root_tone;
 	}
 
-	var scale_map = scale.keys.concat(scale.extra_keys);
+	var scale_tones = scale.tones.concat(scale.extra_tones);
+	var scale_steps = self.scales[scale.scale].steps.concat(scale.extra_steps);
+	var dest_scale_map = self.get_letters(new_root_key, scale_tones, scale_steps);
 
 	for (var i = 0; i < chord_set.length; i++) {
-	    var new_chord = this.shift_chord(chord_set[i], steps, scale_map);
+	    var new_chord = this.shift_chord(chord_set[i], steps, dest_scale_map);
 	    transpose_map[chord_set[i]] = new_chord;
 	}
 
