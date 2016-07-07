@@ -133,7 +133,7 @@ module.exports = {
     get_letters: function (root_key, tones, steps) {
 
 	assert.ok(typeof root_key == 'string', "Root key should be a string");
-	assert.ok(tones.length == steps.length, "Tones and steps should contain equal items");
+//	assert.ok(tones.length == steps.length, "Tones and steps should contain equal items:" + tones +" : " + steps);
 
 	var self = this;
 	var map = [];
@@ -232,6 +232,9 @@ module.exports = {
 	}
 
 	var root_tone = this.tones[m[1]];
+//	console.log("chord_tones:", chord_tones);
+//	console.log("chord_steps:", chord_steps);
+//
 	var chord_keys = self.get_letters(m[1], chord_tones, chord_steps);
 	if (m[3].length > 0 && chord_keys.indexOf(m[3]) == -1) {
 	    chord_keys.push(m[3]);

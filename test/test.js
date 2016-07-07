@@ -187,7 +187,7 @@ describe('sf', function () {
 	sf.find_scale(chord_set_2).should.eql(
 		{
 		    extra_keys: ['Bb', 'Eb', 'F'],
-		    extra_steps: [2, 5, 6],
+		    extra_steps: [3, 6, 0],
 		    extra_tones: [3, 8, 10],
 		    keys: ['G', 'A', 'B', 'C', 'D', 'E', 'F#'],
 		    root_key: 'G',
@@ -232,13 +232,62 @@ describe('sf', function () {
     it('transpose', function () {
 
 	var chord_set_1 = ['Am', 'F', 'C', 'G'];
-	var map = sf.transpose(chord_set_1, "B");
-	console.log(map);
+	sf.transpose(chord_set_1, "B").should.eql({
+	    Am: 'Bm',
+	    F: 'G',
+	    C: 'D',
+	    G: 'A'
+	});
 
 	var chord_set_2 = ['G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'C', 'G/H', 'Am', 'Hm', 'C', 'G', 'F/A', 'D', 'G', 'C', 'Em', 'D', 'G', 'C', 'Em', 'D', 'Eb', 'F', 'Eb', 'F'];
 
 	sf.transpose(chord_set_2, "C")
-		.should.eql();
+		.should.eql(
+			{
+			    G: 'C',
+			    C: 'F',
+			    Em: 'Am',
+			    D: 'G',
+			    'G/H': 'C/E',
+			    Am: 'Dm',
+			    Hm: 'Em',
+			    'F/A': 'Bb/D',
+			    Eb: 'Ab',
+			    F: 'Bb'
+			}
+		);
+
+	sf.transpose(chord_set_2, "C#")
+		.should.eql(
+			{
+			    G: 'C#',
+			    C: 'F#',
+			    Em: 'A#m',
+			    D: 'G#',
+			    'G/H': 'C#/E#',
+			    Am: 'D#m',
+			    Hm: 'E#m',
+			    'F/A': 'B/D#',
+			    Eb: 'A',
+			    F: 'B'
+			}
+		);
+
+	sf.transpose(chord_set_2, "Db")
+		.should.eql(
+			{
+			    G: 'Db',
+			    C: 'Gb',
+			    Em: 'Bbm',
+			    D: 'Ab',
+			    'G/H': 'Db/F',
+			    Am: 'Ebm',
+			    Hm: 'Fm',
+			    'F/A': 'Cb/Eb',
+			    Eb: 'Bbb',
+			    F: 'Cb'
+			}
+		);
 
     });
 });
