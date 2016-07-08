@@ -180,6 +180,7 @@ module.exports = {
 
     parse_chord: function (chord) {
 	var self = this;
+	var bass_tone = null;
 
 	assert.ok(typeof chord == 'string', "Chord should be a string");
 
@@ -200,10 +201,17 @@ module.exports = {
 	    m[1] = "B";
 	if (m[3] == "H")
 	    m[3] = "B";
+
+	var root_key = m[1];
+	var suffix = m[2];
+	var bass_key = m[3] ? m[3] : null;
+	var bass_tone = m[3] ? this.tones[m[3]] : null;
+	var root_tone = this.tones[root_key];
+
 	var chord_tones = null;
 	var chord_steps = null;
 	this.chords.every(function (chord) {
-	    if (chord.suffix == m[2]) {
+	    if (chord.suffix == suffix) {
 		chord_tones = clone(chord.tones);
 		chord_steps = clone(chord.steps);
 		return false;
@@ -216,40 +224,38 @@ module.exports = {
 	}
 
 	/* Add bass note to current chord this.tones list according root tone */
-	if (m[3].length > 0) {
-	    var bass_tone = (12 - this.tones[m[1]] + this.tones[m[3]]) % 12;
+	if (bass_key) {
+	    check_bass_tone = (12 - root_tone + bass_tone) % 12;
 	    var exists = false;
 	    chord_tones.every(function (chord_tone) {
-		if (chord_tone == bass_tone) {
+		if (chord_tone == check_bass_tone) {
 		    exists = true;
 		    return false
 		}
 		return true;
 	    });
 	    if (exists == false) {
-		chord_tones.push(bass_tone);
+		chord_tones.push(check_bass_tone);
 	    }
 	}
 
-	var root_tone = this.tones[m[1]];
-//	console.log("chord_tones:", chord_tones);
-//	console.log("chord_steps:", chord_steps);
-//
-	var chord_keys = self.get_letters(m[1], chord_tones, chord_steps);
-	if (m[3].length > 0 && chord_keys.indexOf(m[3]) == -1) {
-	    chord_keys.push(m[3]);
+	var chord_keys = self.get_letters(root_key, chord_tones, chord_steps);
+	if (bass_key && chord_keys.indexOf(bass_key) == -1) {
+	    chord_keys.push(bass_key);
 	}
 
 	return {
+	    string: chord,
 	    root_tone: root_tone,
-	    bass_tone: m[3] ? this.tones[m[3]] : null,
-	    root_key: m[1],
-	    bass_key: m[3] ? m[3] : null,
+	    bass_tone: bass_tone,
+	    root_key: root_key,
+	    bass_key: bass_key,
 	    tones: chord_tones,
 	    keys: chord_keys,
-	    suffix: m[2],
+	    suffix: suffix,
 	};
     },
+    /* Shift chord. */
     shift_chord: function (chord, steps, scale_map) {
 
 	assert.ok(typeof chord == 'string', "Chord should be a string");

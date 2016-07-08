@@ -53,6 +53,7 @@ describe('sf', function () {
 		    });
 
 		    sf.parse_chord(chord_name).should.eql({
+			string: chord_name,
 			root_tone: sf.tones[root_key],
 			bass_tone: null,
 			root_key: root_key,
@@ -121,6 +122,7 @@ describe('sf', function () {
 			    }
 
 			    sf.parse_chord(chord_name).should.eql({
+				string: chord_name,
 				root_tone: root_tone,
 				bass_tone: bass_tone,
 				root_key: root_key,
