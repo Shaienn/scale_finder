@@ -61,7 +61,7 @@ To find scale put array of chords to the "find_scale" function:
         keys: [ 'G', 'A', 'B', 'C', 'D', 'E', 'F#' ],
         extra_tones: [ 3, 8, 10 ],
         extra_keys: [ 'Bb', 'Eb', 'F' ],
-        extra_steps: [ 2, 5, 6 ] 
+        extra_steps: [ 3, 6, 0 ] 
     }
 
 #Transpose
@@ -79,6 +79,49 @@ Transpose function returns transpose map:
         C: 'D', 
         G: 'A' 
     }
+##Example 4 - Straight A minor to B minor:
 
+    var sf = require('scale_finder');
+    var chords = [ 'Am', 'F', 'C', 'G' ];
+    var scale_object = sf.transpose(chords, "B");
+    console.log(scale_object);
+    { 
+        Am: 'Bm', 
+        F: 'G', 
+        C: 'D', 
+        G: 'A' 
+    }
+    
+##Example 5 - G major with out of scale Eb and F chords to C, C# and Db scales:
 
+    var sf = require('scale_finder');
+    var chords = [ 'G', 'C', 'Em', 'D', 'C', 'G', 'Am', 'Hm', 'Eb', 'F' ];
+    sf.transpose(chords, "Db");
+    { G: 'Db',
+      C: 'Gb',
+      Em: 'Bbm',
+      D: 'Ab',
+      Am: 'Ebm',
+      Hm: 'Fm',
+      Eb: 'Bbb',
+      F: 'Cb' }
 
+    sf.transpose(chords, "C#");
+    { G: 'C#',
+      C: 'F#',
+      Em: 'A#m',
+      D: 'G#',
+      Am: 'D#m',
+      Hm: 'E#m',
+      Eb: 'A',
+      F: 'B' }
+      
+    sf.transpose(chords, "C");
+    { G: 'C',
+      C: 'F',
+      Em: 'Am',
+      D: 'G',
+      Am: 'Dm',
+      Hm: 'Em',
+      Eb: 'Ab',
+      F: 'Bb' }
