@@ -287,7 +287,7 @@ module.exports = {
 	    }
 	}
 
-	if (bass_tone) {
+	if (bass_tone != null) {
 	    for (var key in this.tones) {
 		if (bass_tone == this.tones[key] && scale_map.indexOf(key) > -1) {
 		    parsed_chord.bass_key = key;
@@ -299,7 +299,7 @@ module.exports = {
 	/* Reconstruct */
 
 	var new_chord = parsed_chord.root_key + parsed_chord.suffix;
-	if (bass_tone) {
+	if (bass_tone != null) {
 	    new_chord += '/' + parsed_chord.bass_key;
 	}
 
