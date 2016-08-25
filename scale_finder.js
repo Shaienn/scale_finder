@@ -265,14 +265,14 @@ module.exports = {
 	if (parsed_chord == null) {
 	    return null;
 	}
-
+	
 	var root_tone = (parsed_chord.root_tone + steps) % 12;
 	if (root_tone < 0) {
 	    root_tone += 12;
 	}
 
 	var bass_tone = null;
-	if (parsed_chord.bass_tone) {
+	if (parsed_chord.bass_tone != null) {
 	    bass_tone = (parsed_chord.bass_tone + steps) % 12;
 	    if (bass_tone < 0) {
 		bass_tone += 12;
@@ -286,7 +286,7 @@ module.exports = {
 		break;
 	    }
 	}
-
+	
 	if (bass_tone != null) {
 	    for (var key in this.tones) {
 		if (bass_tone == this.tones[key] && scale_map.indexOf(key) > -1) {
@@ -346,7 +346,6 @@ module.exports = {
 	});
 
 
-
 	for (var tone in chord_set_tones_map) {
 	    var entries = chord_set_tones_map[tone].entries;
 	    entries_array_mixed.push(entries);
@@ -362,7 +361,7 @@ module.exports = {
 	} else {
 	    min_entry = 0;
 	}
-
+	
 	/* Begining from each tone do scales matching */
 
 	var minimal_score = 12;
