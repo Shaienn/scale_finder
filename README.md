@@ -79,18 +79,6 @@ Transpose function returns transpose map:
         C: 'D', 
         G: 'A' 
     }
-##Example 4 - Straight A minor to B minor:
-
-    var sf = require('scale_finder');
-    var chords = [ 'Am', 'F', 'C', 'G' ];
-    var scale_object = sf.transpose(chords, "B");
-    console.log(scale_object);
-    { 
-        Am: 'Bm', 
-        F: 'G', 
-        C: 'D', 
-        G: 'A' 
-    }
     
 ##Example 5 - G major with out of scale Eb and F chords to C, C# and Db scales:
 
